@@ -17,5 +17,5 @@
   "env_server":false,
   "loc_server":false,
   "speed":false,        
-  "tl_server":false
+  "tl_server":true
 }
