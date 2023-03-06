@@ -1,0 +1,2 @@
+2023-03-05 17:16:14.102 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.9134299159049988, 'y': 14.68549919128418}
+2023-03-05 17:16:14.847 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.9134299159049988, 'y': 14.68549919128418}

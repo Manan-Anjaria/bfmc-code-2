@@ -442,7 +442,8 @@ class ParkingBehaviour(BehaviourCallback):
         self.inity = None
         self.phase = 0
         self.over = False
-        self.WB = 0.3
+        # self.WB = 0.3
+        self.WB = 0.265
         self.slot = 1
         self.offsetx = 0
         # 0 init 1 reach empty 2 check empty 3 reach comfortable park spot 4 park 5 out of park
@@ -549,13 +550,13 @@ class ParkingBehaviour(BehaviourCallback):
                 # go to safe spot for reverse
                 # tx = self.initx + 0.5 +  offsetx_1
                 # ty = self.inity - 0.35
-                tx = 3.8 + self.offsetx
-                ty = 1.75
+                tx = 3.6 + self.offsetx
+                ty = 1.6
                 print("In Phase 3", tx, ty)
                 d = math.sqrt(
                     (tx - car_state.rear_x) ** 2 + (ty - car_state.rear_y) ** 2
                 )
-                if d < 0.2:
+                if d < 0.1:
                     self.phase = 4
                 di = self.chase(car_state, tx, ty)
                 return {"steer": di, "speed": car_state.priority_speed}
@@ -569,9 +570,10 @@ class ParkingBehaviour(BehaviourCallback):
                 d = math.sqrt(
                     (tx - car_state.rear_x) ** 2 + ((ty - car_state.rear_y) ** 2)
                 )
-                if d>1:
+                if d>1.00:
                     self.over=True
                 if d < 0.2:
+                    #d<0.2 originally
                     self.phase = 5
                 di = self.reverse_chase(car_state, tx, ty)
                 return {"steer": di, "speed": -car_state.priority_speed}
@@ -590,22 +592,23 @@ class ParkingBehaviour(BehaviourCallback):
                 print("curx,cury", car_state.rear_x, car_state.rear_y)
                 if d>1:
                     self.over=True
-                if d < 0.225:
+                if d < 0.225 or car_state.rear_y > 2.9:
                     self.phase = 6
+                    self.over = True
                 di = self.reverse_chase(car_state, tx, ty)
                 return {"steer": di, "speed": -car_state.priority_speed}
 
-            elif self.phase == 6:
-                print("In Phase 6")
-                tx = 3.4 + self.offsetx
-                ty = 2.2
-                d = math.sqrt(
-                    (tx - car_state.rear_x) ** 2 + (ty - car_state.rear_y) ** 2
-                )
-                if d < 0.25:
-                    self.over = True
-                di = self.chase(car_state, tx, ty)
-                return {"steer": di, "speed": +car_state.priority_speed}
+#            elif self.phase == 6:
+ #               print("In Phase 6")
+  #              tx = 3.4 + self.offsetx
+   #             ty = 2.2
+    #            d = math.sqrt(
+     #               (tx - car_state.rear_x) ** 2 + (ty - car_state.rear_y) ** 2
+      #          )
+       #         if d < 0.25 or car_state.rear_y > 2.6:
+        #            self.over = True
+         #       di = self.chase(car_state, tx, ty)
+          #      return {"steer": di, "speed": +car_state.priority_speed}
 
             else:
                 print("Parking phase out of sync ")

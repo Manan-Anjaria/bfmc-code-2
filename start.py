@@ -295,7 +295,7 @@ if config["enableStream"]:
 
 # ========================== Camera process ==============================================
 if config["enableCameraSpoof"]:
-    camSpoofer = CameraSpooferProcess(camOutNames, "vid1")
+    camSpoofer = CameraSpooferProcess(camOutNames, "vid_1")
     allProcesses.append(camSpoofer)
 else:
     if config["enableSIM"]:

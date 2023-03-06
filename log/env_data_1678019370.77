@@ -1,0 +1,13 @@
+2023-03-05 17:59:33.971 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.9581336975097656, 'y': 14.666816711425781}
+2023-03-05 17:59:38.190 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.7753596305847168, 'y': 14.697891235351562}
+2023-03-05 17:59:38.483 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.7753596305847168, 'y': 14.697891235351562}
+2023-03-05 17:59:39.084 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.7753596305847168, 'y': 14.697891235351562}
+2023-03-05 17:59:39.662 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8240216374397278, 'y': 14.685758590698242}
+2023-03-05 17:59:39.948 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8240216374397278, 'y': 14.685758590698242}
+2023-03-05 17:59:41.426 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8411873579025269, 'y': 14.715087890625}
+2023-03-05 17:59:41.862 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8411873579025269, 'y': 14.715087890625}
+2023-03-05 17:59:42.296 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8411873579025269, 'y': 14.715087890625}
+2023-03-05 17:59:42.584 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8787325088157821, 'y': 14.666598630584716}
+2023-03-05 17:59:45.263 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8365751713238825, 'y': 14.636841176553736}
+2023-03-05 17:59:45.554 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8365751713238825, 'y': 14.636841176553736}
+2023-03-05 17:59:45.848 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.833736660559888, 'y': 14.690220212177849}

@@ -1,0 +1,7 @@
+2023-03-06 08:13:32.391 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.7902324795722961, 'y': 14.76667594909668}
+2023-03-06 08:13:33.450 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.7902324795722961, 'y': 14.76667594909668}
+2023-03-06 08:13:33.817 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8326347470283508, 'y': 14.629186630249023}
+2023-03-06 08:13:35.790 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.921863317489624, 'y': 14.719785690307617}
+2023-03-06 08:13:36.340 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.921863317489624, 'y': 14.719785690307617}
+2023-03-06 08:13:37.928 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.8406900763511658, 'y': 14.757232666015625}
+2023-03-06 08:13:40.530 | ENV      | src.lib.cortex.decisionproc:_the_thread:378 - {'obstacle_id': 11, 'x': 0.9565475583076477, 'y': 14.59555435180664}

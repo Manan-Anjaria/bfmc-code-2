@@ -6,7 +6,7 @@ from typing import List
 import numpy as np
 
 # import SharedArray as sa
-from loguru import logger
+#from loguru import logger
 import zmq
 import numpy as np
 
@@ -15,6 +15,8 @@ from src.lib.perception.lanekeepfunctions import LaneKeep as LaneKeepMethod
 from src.templates.workerprocess import WorkerProcess
 
 MAX_STEER = 23
+
+
 
 
 def get_last(inP: Connection):

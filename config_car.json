@@ -7,7 +7,7 @@
   "enableSIM": false,
   "loc_server": false,
   "tl_server": false,
-  "test_track": false,
+  "test_track": true,
   "env_server": false,
   "start_idx": "86",
   "end_idx": "40",

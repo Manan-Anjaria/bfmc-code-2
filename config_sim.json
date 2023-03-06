@@ -11,11 +11,11 @@
   "test_track": false,
   "pc_ip": "0.0.0.0",
   "pi_ip": "0.0.0.0",
-  "home_loc": false,
+  "home_loc": true,
   "preplan": false,
   "park": true,
-  "env_server":false,
-  "loc_server":false,
+  "env_server":true,
+  "loc_server":true,
   "speed":false,        
   "tl_server":true
 }
