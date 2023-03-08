@@ -58,10 +58,30 @@ if config["speed"]:
     "activity":["navigation","finish"] 
 }
 else:
-   activity_config = {
-    "nodes":[[86,158],[159,226],[227,345],[346,105],[106,111],[70,85]],# [],[]],
-    "activity":["navigation","parking","tohighway","highway","finish","finish2"] 
+    activity_config = {
+    "nodes": [
+        [86, 78],
+        [87, 42],
+        [98, 111],
+        [70, 128],
+        [230, 104],
+        [105, 465],
+        [466, 85],
+    ],
+    "activity": [
+        "navigation",
+        "roadblocked",
+        "parking",
+        "overtaking",
+        "highway",
+        "oneway",
+        "finish",
+    ],
 }
+#   activity_config = {
+#    "nodes":[[86,158],[159,226],[227,345],[346,105],[106,111],[70,85]],# [],[]],
+#    "activity":["navigation","parking","tohighway","highway","finish","finish2"] 
+# }
 
 print(activity_config)
 #car length originally 0.365

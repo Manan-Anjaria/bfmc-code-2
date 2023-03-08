@@ -56,10 +56,10 @@ def trigger_behaviour(carstate: CarState, action_man: ActionManager):
         if d < 0.2:
             triggerparking = True
 
-    # print(carstate.side_distance)
+   # print(carstate.side_distance)
     if carstate.detected_intersection and carstate.current_ptype == "int":
-        # intersection
-        pass
+       # intersection
+       pass
 
     if carstate.detected_intersection:
         # pass
@@ -75,6 +75,7 @@ def trigger_behaviour(carstate: CarState, action_man: ActionManager):
         parkobjaction = ActionBehaviour(name="parking", callback=parkobj)
         action_man.set_action(parkobjaction, action_time=None, car_state=carstate)
 
+    #dont uncomment below line
     # print("carstate-frnt: ", carstate.front_distance)
     # print("carstate-can-overtake:", carstate.can_overtake)
     if (

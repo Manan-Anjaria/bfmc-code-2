@@ -82,6 +82,8 @@ class SIMCameraProcess(WorkerProcess):
     def _read_stream(self, outPs):
         """Read the image from input stream, decode it and display it with the CV2 library."""
         try:
+            print("ashdiusagdihyhgybhbasdiyfyvsauyfgsauygfvsluahyfsakuygdsajhgd")
+            print(self.outPsname)
             if "lk" in self.outPsname:
                 context_lk = zmq.Context()
                 pub_cam_lk = context_lk.socket(zmq.PUB)
@@ -127,8 +129,11 @@ class SIMCameraProcess(WorkerProcess):
                 if "sd" in self.outPsname:
                     pub_cam_sd.send(image, flags=zmq.NOBLOCK)
 
-        except Exception:
-            pass
+        except Exception as e:
+            print(e)
+            print("sduiduuiiuiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+            raise e
+            #pass
         finally:
             self.connection.close()
             footage_socket.close()

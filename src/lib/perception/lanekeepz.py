@@ -6,7 +6,7 @@ from typing import List
 import numpy as np
 
 # import SharedArray as sa
-#from loguru import logger
+from loguru import logger
 import zmq
 import numpy as np
 
@@ -100,7 +100,6 @@ class LaneKeepingProcess(WorkerProcess):
             pub_lk_img = context_send_img.socket(zmq.PUB)
             pub_lk_img.setsockopt(zmq.CONFLATE, 1)
             pub_lk_img.bind("ipc:///tmp/v52")
-
         try:
             while True:
                 # Obtain image
@@ -114,10 +113,10 @@ class LaneKeepingProcess(WorkerProcess):
                 t_r += time.time() - image_recv_start
                 count += 1
 
-                logger.log(
-                    "TIME",
-                    f"Time taken to rec image {(t_r/count):.4f}s",
-                )
+                #logger.log(
+                 #   "TIME",
+                  #  f"Time taken to rec image {(t_r/count):.4f}s",
+                #)
                 compute_time = time.time()
                 # Apply image processing
                 # if self.enable_stream and False:
@@ -127,6 +126,8 @@ class LaneKeepingProcess(WorkerProcess):
                 #     pub_lk_img.send(outimage.tobytes(), flags=zmq.NOBLOCK)
                 # else:
                 val, intersection_detected = self.lk(img)
+                print("intersection bool : ")
+                print(intersection_detected)
                 angle = self.computeSteeringAnglePID(val)
                 pub_lk.send_json((angle, intersection_detected), flags=zmq.NOBLOCK)
 
@@ -135,4 +136,5 @@ class LaneKeepingProcess(WorkerProcess):
 
                 # print("Timetaken by LK: ", time() - a)
         except Exception as e:
+            # print(e)
             raise e

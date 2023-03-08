@@ -381,10 +381,10 @@ class ObjectStopBehaviour(BehaviourCallback):
         if car_state.detected["pedestrian"][0]:
             x,y=car_state.detected["pedestrian"][1][1]
             # print("Pedestrain", car_state.detected["pedestrian"])
+            # print(f"{x}, {y}")
             x,y=0,0
             
-            
-            if x>thxl and x<thxh and y>thyl and y<thyh:
+            if x>=thxl and x<thxh and y>=thyl and y<thyh:
                 return {"speed": 0.0}
             else:
                 return None
@@ -415,7 +415,7 @@ class CrosswalkBehavior(BehaviourCallback):
 
         if d > 1.1:
             self.active = False
-
+        
         if car_state.front_distance < 0.3:
             return {"speed": 0.0}
 
