@@ -78,7 +78,7 @@ def filter_level(level: List[int]):
     return lambda r: r["level"].no in level
 
 
-LOG_STDOUT = False
+LOG_STDOUT = True
 logger.remove()
 if LOG_STDOUT:
     logger.add(
@@ -262,8 +262,8 @@ else:
 
 # Serial handler or Simulator Connector
 if config["enableSIM"] and isPI:
-    # shProc = SimulatorConnector([mcSSHR], [])
-    # allProcesses.append(shProc)
+    shProc = SimulatorConnector([mcSSHR], [])
+    allProcesses.append(shProc)
 
     shProc = SerialHandlerProcess([mcSHR], [])
     allProcesses.append(shProc)

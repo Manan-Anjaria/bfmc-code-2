@@ -6,7 +6,7 @@
   "enableSIM": true,
   "enableSignDet":true,
   "start_idx": "86",
-  "end_idx": "200",
+  "end_idx": "370",
   "using_server": false,
   "test_track": false,
   "pc_ip": "0.0.0.0",

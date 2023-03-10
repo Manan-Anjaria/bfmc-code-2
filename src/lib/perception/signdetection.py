@@ -113,6 +113,7 @@ class SignDetectionProcess(WorkerProcess):
                     pub_sd_img.send(outimage.tobytes(), flags=zmq.NOBLOCK)
 
                 # logger.log("SD", f"detections -> {detections}")
+                print("SD", f"detections -> {detections}")
 
             except Exception as e:
                 print("Sign Detection error:")
