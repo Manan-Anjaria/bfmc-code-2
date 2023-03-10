@@ -95,8 +95,7 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
                 for outP in outPs:
                     outP.send(command)
-                    print("RC RECVVVV 111111111")
-                print("RC RECVVVV 2222222222")
+                    print(command)
 
         except Exception as e:
             print(e)
