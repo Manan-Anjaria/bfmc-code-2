@@ -53,7 +53,7 @@ class RemoteControlTransmitterProcess(Thread):
 
         self.port      =  12244
         # self.serverIp  = '192.168.1.2'
-        self.serverIp = '192.168.194.216'
+        self.serverIp = '192.168.194.151'
 
         self.threads = list()
     # ===================================== RUN ==========================================

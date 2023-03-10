@@ -61,7 +61,7 @@ class RemoteControlReceiverProcess(WorkerProcess):
         """
         self.port       =   12244
         # self.serverIp   =   '0.0.0.0'
-        self.serverIp = '192.168.194.151'
+        self.serverIp = '192.168.194.216'
 
         self.server_socket = socket.socket(
                                     family  = socket.AF_INET, 
@@ -95,6 +95,8 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
                 for outP in outPs:
                     outP.send(command)
+                    print("RC RECVVVV 111111111")
+                print("RC RECVVVV 2222222222")
 
         except Exception as e:
             print(e)
