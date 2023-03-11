@@ -78,7 +78,7 @@ def filter_level(level: List[int]):
     return lambda r: r["level"].no in level
 
 
-LOG_STDOUT = False
+LOG_STDOUT = True
 logger.remove()
 if LOG_STDOUT:
     logger.add(
@@ -116,9 +116,7 @@ if config["enableRc"]:
     # rc  ->  serial handler
     rcShR, rcShS = Pipe(duplex=False)
     rcProc = RemoteControlReceiverProcess([], [rcShS])
-    rcProc2 = SerialHandlerProcess([rcShR], [])
     allProcesses.append(rcProc)
-    allProcesses.append(rcProc2)
 
 
 # ===================================== PERCEPTION ===================================

@@ -103,13 +103,13 @@ def trigger_behaviour(carstate: CarState, action_man: ActionManager):
         robobjaction = ActionBehaviour(name="roadblocked", callback=robobj)
         action_man.set_action(robobjaction, action_time=None, car_state=carstate)
 
-    # if carstate.detected["roundabout"][0] or (
-    #     carstate.current_ptype == "roundabout" and action_man.l1_ab is None
-    # ):
-    #     print("In round about trigger: ", carstate.current_ptype)
-    #     rabobj = RoundAboutBehaviour(car_state=carstate)
-    #     rabobjaction = ActionBehaviour(name="roundabout", callback=rabobj)
-    #     action_man.set_action(rabobjaction, action_time=None, car_state=carstate)
+    if carstate.detected["roundabout"][0] or (
+        carstate.current_ptype == "roundabout" and action_man.l1_ab is None
+    ):
+        print("In round about trigger: ", carstate.current_ptype)
+        rabobj = RoundAboutBehaviour(car_state=carstate)
+        rabobjaction = ActionBehaviour(name="roundabout", callback=rabobj)
+        action_man.set_action(rabobjaction, action_time=None, car_state=carstate)
 
     if carstate.detected["stop"][0]:
         # stop for t secs

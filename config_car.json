@@ -10,9 +10,9 @@
   "test_track": true,
   "env_server": false,
   "start_idx": "86",
-  "end_idx": "345",
-  "pc_ip": "192.168.194.151",
-  "pi_ip": "192.168.194.216",
+  "end_idx": "374",
+  "pc_ip": "192.168.29.19",
+  "pi_ip": "192.168.29.66",
   "home_loc": false,
   "preplan": false,
   "speed":false

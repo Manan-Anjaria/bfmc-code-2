@@ -66,8 +66,7 @@ else:
         [111, 71],
         [124, 158],
         [159, 226],
-        [227, 304],
-        [343, 370],
+        [227, 345],
     ],
     "activity": [
         "navigation",
@@ -77,7 +76,6 @@ else:
         "navigation2",
         "parking",
         "tohighway",
-        "highway",
     ],
 }
 #   activity_config = {

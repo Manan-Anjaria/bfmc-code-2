@@ -377,14 +377,14 @@ class ObjectStopBehaviour(BehaviourCallback):
 
         if car_state.front_distance < 0.27 and car_state.detected["car"][0]:
                 return {"speed": 0.0}
-        #car_state.front_distance < 0.27
+        
         if car_state.detected["pedestrian"][0]:
             x,y=car_state.detected["pedestrian"][1][1]
             # print("Pedestrain", car_state.detected["pedestrian"])
             # print(f"{x}, {y}")
             x,y=0,0
             
-            if x>thxl and x<thxh and y>thyl and y<thyh:
+            if x>=thxl and x<thxh and y>=thyl and y<thyh:
                 return {"speed": 0.0}
             else:
                 return None
