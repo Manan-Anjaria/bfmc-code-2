@@ -149,3 +149,4 @@ dmypy.json
 .pyre/
 
 final_openvino_model/
+final_openvino_model-20230110T155349Z-001.zip
