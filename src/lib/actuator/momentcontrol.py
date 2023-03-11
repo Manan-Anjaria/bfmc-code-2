@@ -2,7 +2,7 @@ import time
 from threading import Thread
 
 from src.templates.workerprocess import WorkerProcess
-
+from src.utils.remotecontrol.RemoteControlReceiverProcess import _read_stream_command as read_command
 
 class MovementControl(WorkerProcess):
     # ===================================== Worker process =========================================
@@ -130,6 +130,9 @@ class MovementControl(WorkerProcess):
         steer_data["steerAngle"] = float(self.angle)
         # print(speed_data)
         # print(steer_data)
+
+        command = read_command()
+        print(command)
 
         # Send data
         try:
