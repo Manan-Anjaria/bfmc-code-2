@@ -116,7 +116,9 @@ if config["enableRc"]:
     # rc  ->  serial handler
     rcShR, rcShS = Pipe(duplex=False)
     rcProc = RemoteControlReceiverProcess([], [rcShS])
+    rcProc2 = SerialHandlerProcess([rcShR], [])
     allProcesses.append(rcProc)
+    allProcesses.append(rcProc2)
 
 
 # ===================================== PERCEPTION ===================================

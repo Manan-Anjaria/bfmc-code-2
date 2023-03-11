@@ -96,8 +96,10 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
                 bts = bts.decode()
                 command = json.loads(bts)
-                send_command = command
-                print(send_command)
+                # send_command = command
+                # print(send_command)
+                # RemoteControlReceiverProcess.send_command = command  # set the class variable
+                # print(RemoteControlReceiverProcess.send_command)
 
                 for outP in outPs:
                     outP.send(command)
@@ -108,6 +110,9 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
         finally:
             self.server_socket.close()
-        
-        return send_command
+
+    # def sending_command_val(self):
+    #     return send_command
+    # def sending_command_val(cls):
+    #     return cls.send_command  # use the class variable
 
