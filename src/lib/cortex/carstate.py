@@ -89,7 +89,7 @@ print(activity_config)
 #car length originally 0.365
 #vmax=0.20
 class CarState:
-    def __init__(self, max_v=0.20, dt=0.13, car_len=0.26, **kwargs) -> None:
+    def __init__(self, max_v=0.00, dt=0.13, car_len=0.26, **kwargs) -> None:
 
         self.max_v = max_v
         # position data
