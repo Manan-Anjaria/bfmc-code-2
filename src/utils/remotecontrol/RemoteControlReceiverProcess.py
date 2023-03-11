@@ -43,7 +43,7 @@ class RemoteControlReceiverProcess(WorkerProcess):
         ------------
         inPs : list(Pipe)
             List of input pipes (not used at the moment)
-        outPs : list(Pipe) 
+        outPs : list(Pipe)
             List of output pipes (order does not matter)
         """
 
@@ -72,7 +72,7 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
     # ===================================== INIT THREADS =================================
     def _init_threads(self):
-        """Initialize the read thread to transmite the received messages to other processes. 
+        """Initialize the read thread to transmite the received messages to other processes.
         """
         readTh = Thread(name='ReceiverCommandThread',
                         target=self._read_stream, args=(self.outPs, ))
@@ -80,7 +80,7 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
     # ===================================== READ STREAM ==================================
     def _read_stream(self, outPs):
-        """Receive the message and forwards them to the SerialHandlerProcess. 
+        """Receive the message and forwards them to the SerialHandlerProcess.
 
         Parameters
         ----------
@@ -97,25 +97,12 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
                 for outP in outPs:
                     outP.send(command)
-                    print(command)
+                    # print(command)
 
         except Exception as e:
             print(e)
 
         finally:
             self.server_socket.close()
-
-    def _read_stream_command(self):
-        try:
-            while True:
-                bts, addr = self.server_socket.recvfrom(1024)
-                bts = bts.decode()
-                command = json.loads(bts)
         
-        except Exception as e:
-            print(e)
-
-        finally:
-            self.server_socket.close()
-
-        return command 
+        return command

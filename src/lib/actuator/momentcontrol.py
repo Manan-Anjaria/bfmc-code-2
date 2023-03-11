@@ -132,9 +132,9 @@ class MovementControl(WorkerProcess):
         # print(steer_data)
 
         rcv = RemoteControlReceiverProcess([], [])
-        command = rcv._read_stream_command()
+        command = rcv._read_stream()
         print(command)
-        
+
         # Send data
         try:
             for outP in outPs:
