@@ -203,7 +203,7 @@ if isPI and not config["enableSIM"]:
     posFusionInputName.append("imu")
 
 else:
-    imuProc = IMUSIM([], [], "imu", 5555)
+    imuProc = IMUSIM([], [], "imu", 5555,log=True)
     allProcesses.append(imuProc)
     posFusionInputName.append("imu")
 
