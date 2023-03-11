@@ -9,6 +9,7 @@ from multiprocessing.connection import Connection
 
 from src import config as config_module
 from time import sleep
+
 import time
 
 parser = argparse.ArgumentParser()
@@ -184,7 +185,7 @@ elif config["tl_server"]:
 # Distance Sensor -> Decision Making (data fusion)
 
 if config["enableSIM"]:
-    disProc = DistanceSIM([], [], 6666, log=False)
+    disProc = DistanceSIM([], [], 6666, log=True)
     allProcesses.append(disProc)
     dataFusionInputName.append("dis")
 
@@ -310,9 +311,9 @@ print("Starting the processes!", allProcesses)
 if sDProc is not None:
     sDProc.daemon = True
     sDProc.start()
-    while not loaded_model.value:
-        print("Waiting on sDProc")
-        sleep(1)
+    # while not loaded_model.value:
+    #     print("Waiting on sDProc")
+    #     sleep(1)
 
     for proc in allProcesses:
         proc.daemon = True

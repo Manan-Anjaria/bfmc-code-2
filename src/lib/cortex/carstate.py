@@ -159,7 +159,7 @@ class CarState:
         # control parameters
         self.steering_angle = 0.0
         self.v = max_v
-        self.priority_speed = 0.2
+        self.priority_speed = 0.15
         self.highway_speed = 0.275
 
         # activity type
