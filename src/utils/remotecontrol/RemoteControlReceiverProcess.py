@@ -35,6 +35,8 @@ from src.templates.workerprocess import WorkerProcess
 
 
 class RemoteControlReceiverProcess(WorkerProcess):
+
+    global send_command
     # ===================================== INIT =========================================
     def __init__(self, inPs, outPs):
         """Run on raspberry. It forwards the control messages received from socket to the serial handler
@@ -94,6 +96,8 @@ class RemoteControlReceiverProcess(WorkerProcess):
 
                 bts = bts.decode()
                 command = json.loads(bts)
+                send_command = command
+                print(send_command)
 
                 for outP in outPs:
                     outP.send(command)
@@ -105,4 +109,5 @@ class RemoteControlReceiverProcess(WorkerProcess):
         finally:
             self.server_socket.close()
         
-        return command
+        return send_command
+
