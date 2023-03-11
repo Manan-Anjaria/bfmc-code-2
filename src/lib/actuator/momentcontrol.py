@@ -2,7 +2,7 @@ import time
 from threading import Thread
 
 from src.templates.workerprocess import WorkerProcess
-from src.utils.remotecontrol.RemoteControlReceiverProcess import _read_stream_command as read_command
+from src.utils.remotecontrol.RemoteControlReceiverProcess import RemoteControlReceiverProcess
 
 class MovementControl(WorkerProcess):
     # ===================================== Worker process =========================================
@@ -131,9 +131,10 @@ class MovementControl(WorkerProcess):
         # print(speed_data)
         # print(steer_data)
 
-        command = read_command()
+        rcv = RemoteControlReceiverProcess([], [])
+        command = rcv._read_stream_command()
         print(command)
-
+        
         # Send data
         try:
             for outP in outPs:
