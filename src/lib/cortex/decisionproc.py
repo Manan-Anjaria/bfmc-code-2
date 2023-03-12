@@ -409,6 +409,7 @@ class DecisionMakingProcess(WorkerProcess):
                 logger.debug(f"Sonar Side: {self.state.side_distance}")
                 # print(f"Final -> ({self.state.steering_angle, self.state.v})")
                 # print("OUT",self.state.steering_angle, self.state.v)
+                sleep(0.2)
                 if len(outPs) > 0:
                     outPs[0].send((self.state.steering_angle, self.state.v))
                     # outPs[0].send((0.0, 0.0))
