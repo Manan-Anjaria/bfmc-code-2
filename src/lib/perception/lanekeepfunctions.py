@@ -7,9 +7,18 @@ from xml.dom import ValidationErr
 
 import cv2
 import numpy as np
+import pandas as pd 
+import time
+import csv
 
 from src.lib.perception.graph_func import bfs_4
 
+f1 = open('streeing_angles.csv','w',newline='')
+
+writer = csv.writer(f1)
+
+row = ['Time','steering angle']
+writer.writerow(row)
 
 def draw_line(img, lines):
     # create a copy of the original frame
@@ -506,4 +515,9 @@ def compute_steering_angle_lanelinecoord(frame, lane_lines):
     steering_angle = angle_to_mid_deg + 90
 
     # print("new steering angle: %s" % steering_angle)
+
+
+    row = [time.time(),steering_angle]
+    writer.writerow(row)
+   
     return steering_angle
