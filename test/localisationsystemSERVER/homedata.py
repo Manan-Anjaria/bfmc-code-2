@@ -10,35 +10,20 @@ from threading import Thread
 from workerprocess import WorkerProcess
 import joblib
 
-PI_IP = "192.168.220.89"
+PI_IP = "192.168.251.242"
 PORT = 8888
-
 
 def localize(img: np.ndarray) -> Tuple[float, float]:
     AREA_THRES = 100.0
+    # AREA_THRES = 50.0
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # preprocess
-    # kernel = np.ones((5,5), np.uint8)
-    # img_erosion = cv2.erode(img, kernel, iterations=2)
     frame_HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    # (2, 29), (54, 255), (74, 255)
-    # 8 116 102
-    # 20 252 210
-    # HUE BLUE | 0 -> 30
-    frame_threshold = cv2.inRange(frame_HSV, (100, 150, 150), (180, 255, 255))
-    # processed_img2 = cv2.bitwise_and(img,img, mask=frame_threshold)
-    # get contours
+    # cv2.imshow('frame HSV', frame_HSV)
+    # print(frame_HSV[521,493])
+    frame_threshold = cv2.inRange(img, (35, 100, 150), (80, 160, 240))
     cnts = cv2.findContours(frame_threshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #print(cnts)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    # # find contour with max area
-    # max = 0
-    # idx = -1
-    # for i,c in enumerate(cnts):
-    #     area = cv2.contourArea(c)
-    #     if area > max:
-    #         idx = i
-    #         max = area
-    # blue_box = cnts[idx]
     x = None
     y = None
     if len(cnts) > 0:
@@ -48,9 +33,6 @@ def localize(img: np.ndarray) -> Tuple[float, float]:
             x, y, w, h = cv2.boundingRect(blue_box)
             x = x + w / 2
             y = y + h / 2
-    # f_img = cv2.drawContours(processed_img2, [blue_box], -1, (255,0,0), 2)
-    # plt.figure(figsize=(12,12))
-    # plt.imshow(f_img[100:200,350:450])
     x = round(6 * x / 720, 2) if x else x
     y = round(6 * y / 720, 2) if y else y
     return x, y
@@ -130,7 +112,8 @@ class LocalisationServer:
                 jpg = bytes1[a : b + 2]  # get frame based on markers
                 bytes1 = bytes1[c + 2 :]  # update buffer to store data
                 # of last frame present in chunk
-                i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                # i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                i = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                 # specify desired output size
                 width = 720
                 height = 1280
@@ -144,7 +127,8 @@ class LocalisationServer:
                 )
 
                 # compute perspective matrixbytes1 = bytes1[b+2:]
-                i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                # i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                i = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                 # specify desired output size
                 width = 720
                 # height = 1280
@@ -160,6 +144,7 @@ class LocalisationServer:
                     borderValue=(0, 0, 0),
                 )
                 x, y = localize(image)
+                # print(x,y)
                 if x and y:
                     # rx.append(x)
                     # ry.append(y)

@@ -56,7 +56,7 @@ import sys
 from loguru import logger
 from typing import List
 
-isPI = True
+isPI = False
 try:
     from src.utils.IMU.imuProc import IMUProcess
 except Exception as e:

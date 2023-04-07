@@ -42,10 +42,11 @@ import zmq
 
 rx = []
 ry = []
-
+ 
 
 def trigger_behaviour(carstate: CarState, action_man: ActionManager):
     triggerparking = False
+    # tempFlag = Fa
 
     if hasattr(carstate, "parkingcoords"):
         # print("Triggered Parking")
@@ -64,9 +65,12 @@ def trigger_behaviour(carstate: CarState, action_man: ActionManager):
     if carstate.detected_intersection:
         # pass
         # stop for t secs intersection
-        stopobj = StopBehvaiour()
-        stopaction = ActionBehaviour(name="stop", release_time=6.0, callback=stopobj)
-        action_man.set_action(stopaction, action_time=3.0)
+        if "priority" in carstate.active_behaviours:
+            pass
+        else:
+            stopobj = StopBehvaiour()
+            stopaction = ActionBehaviour(name="stop", release_time=6.0, callback=stopobj)
+            action_man.set_action(stopaction, action_time=7.0)
 
     if carstate.detected["parking"][0]:
         print("In parking trigger: ", triggerparking, carstate.detected["parking"][0])
@@ -117,9 +121,12 @@ def trigger_behaviour(carstate: CarState, action_man: ActionManager):
         stopaction = ActionBehaviour(name="stop", release_time=5.0, callback=stopobj)
         action_man.set_action(stopaction, action_time=5.0)
 
+
     if carstate.detected["priority"][0]:
         pass
         # slowdown for t secs
+        tempFlag = True
+
         priorityobj = PriorityBehaviour()
         priorityaction = ActionBehaviour(
              name="priority", release_time=7.0, callback=priorityobj
@@ -215,6 +222,7 @@ class DecisionMakingProcess(WorkerProcess):
             
         self.inPsnames = inPsnames
         self.actman = ActionManager()
+        
 
         lkobj = LaneKeepBehaviour()
         lkaction = ActionBehaviour(name="lk", callback=lkobj)
@@ -409,7 +417,7 @@ class DecisionMakingProcess(WorkerProcess):
                 logger.debug(f"Sonar Side: {self.state.side_distance}")
                 # print(f"Final -> ({self.state.steering_angle, self.state.v})")
                 # print("OUT",self.state.steering_angle, self.state.v)
-                sleep(0.2)
+                sleep(0.1)
                 if len(outPs) > 0:
                     outPs[0].send((self.state.steering_angle, self.state.v))
                     # outPs[0].send((0.0, 0.0))

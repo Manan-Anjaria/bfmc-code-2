@@ -9,83 +9,48 @@ from src.config import get_config
 
 config = get_config()
 
-# activity_config = {
-#     "nodes": [
-#         [86, 99],
-#         [100, 145],
-#         [61, 168],
-#         [169, 229],
-#         [230, 104],
-#         [105, 465],
-#         [466, 85],
-#     ],
-#     "activity": [
-#         "navigation",
-#         "roadblocked",
-#         "parking",
-#         "overtaking",
-#         "highway",
-#         "oneway",
-#         "finish",
-#     ],
-# }
-
-# activity_config = {
-#     "nodes": [
-#         [86, 69],
-#         [110, 145],
-#         [61, 168],
-#         [169, 229],
-#         [230, 104],
-#         [105, 465],
-#         [466, 85],
-#     ],
-#     "activity": [
-#         "navigation",
-#         "roadblocked",
-#         "parking",
-#         "overtaking",
-#         "highway",
-#         "oneway",
-#         "finish",
-#     ],
-# }
-# 
 
 if config["speed"]:
-     activity_config = {
-    "nodes":[[86,220],[221,85]],# [],[]],
-    "activity":["navigation","finish"] 
-}
+    activity_config = {
+        "nodes": [[86, 220], [221, 85]],  # [],[]],
+        "activity": ["navigation", "finish"]
+    }
 else:
     activity_config = {
-    "nodes": [
-        [86, 78],
-        [87, 42],
-        [98, 1],
-        [111, 71],
-        [124, 158],
-        [159, 226],
-        [227, 345],
-    ],
-    "activity": [
-        "navigation",
-        "priority",
-        "stop",
-        "priority2",
-        "navigation2",
-        "parking",
-        "tohighway",
-    ],
-}
+        # [],[]],
+        "nodes": [[38, 44], [18, 15], [75, 73], [8, 5], [76, 23]],
+        "activity": ["navigation", "parking", "tohighway", "highway", "finish"]
+    }
+#     activity_config = {
+#     "nodes": [
+#         [86, 78],
+#         [87, 42],
+#         [98, 1],
+#         [111, 71],
+#         [124, 158],
+#         [159, 226],
+#         [227, 345],
+#     ],
+#     "activity": [
+#         "navigation",
+#         "priority",
+#         "stop",
+#         "priority2",
+#         "navigation2",
+#         "parking",
+#         "tohighway",
+#     ],
+# }
 #   activity_config = {
 #    "nodes":[[86,158],[159,226],[227,345],[346,105],[106,111],[70,85]],# [],[]],
-#    "activity":["navigation","parking","tohighway","highway","finish","finish2"] 
+#    "activity":["navigation","parking","tohighway","highway","finish","finish2"]
 # }
 
 print(activity_config)
-#car length originally 0.365
-#vmax=0.20
+# car length originally 0.365
+# vmax=0.20
+
+
 class CarState:
     def __init__(self, max_v=0.20, dt=0.13, car_len=0.26, **kwargs) -> None:
 
@@ -135,7 +100,7 @@ class CarState:
             "roundabout": (False, 0, (-1, 1)),
             "stop": (False, 0, (-1, 1)),
             "trafficlight": (False, 0, (-1, 1)),
-            "doll":(False, 0, (-1, 1))
+            "doll": (False, 0, (-1, 1))
         }
 
         # distance sensor
@@ -144,7 +109,7 @@ class CarState:
 
         self.target_ind = None
         # traffic light semaphore
-        self.tl = {"s0":0,"s1":0,"s2":0,"s3":0}
+        self.tl = {"s0": 0, "s1": 0, "s2": 0, "s3": 0}
 
         # active behavious
         self.active_behaviours = []
@@ -159,6 +124,7 @@ class CarState:
         # control parameters
         self.steering_angle = 0.0
         self.v = max_v
+        # self.priority_speed = 0.15
         self.priority_speed = 0.15
         self.highway_speed = 0.275
 
@@ -199,7 +165,8 @@ class CarState:
         self.y = self.y + self.v * math.sin(-self.yaw) * dt
         self.yaw = (
             self.yaw
-            - self.v / self.car_len * math.tan(self.steering_angle * math.pi / 180) * dt
+            - self.v / self.car_len *
+            math.tan(self.steering_angle * math.pi / 180) * dt
         )
         self.rear_x = self.x - ((self.car_len / 2) * math.cos(-self.yaw))
         self.rear_y = self.y - ((self.car_len / 2) * math.sin(-self.yaw))

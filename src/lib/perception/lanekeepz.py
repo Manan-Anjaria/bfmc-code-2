@@ -4,6 +4,7 @@ from threading import Thread
 import time
 from typing import List
 import numpy as np
+import cv2
 
 # import SharedArray as sa
 from loguru import logger
@@ -108,7 +109,9 @@ class LaneKeepingProcess(WorkerProcess):
                 data = sub_cam.recv()
                 data = np.frombuffer(data, dtype=np.uint8)
                 img = np.reshape(data, (480, 640, 3))
-
+                
+                # cv2.imshow('Image', img)
+                # cv2.imwrite(time.time(), img)
                 # print("lk img recv")
                 t_r += time.time() - image_recv_start
                 count += 1
