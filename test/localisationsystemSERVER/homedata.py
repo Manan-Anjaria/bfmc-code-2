@@ -10,7 +10,7 @@ from threading import Thread
 from workerprocess import WorkerProcess
 import joblib
 
-PI_IP = "192.168.251.242"
+PI_IP = "192.168.152.242"
 PORT = 8888
 
 def localize(img: np.ndarray) -> Tuple[float, float]:
