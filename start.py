@@ -79,7 +79,7 @@ def filter_level(level: List[int]):
     return lambda r: r["level"].no in level
 
 
-LOG_STDOUT = True
+LOG_STDOUT = False
 logger.remove()
 if LOG_STDOUT:
     logger.add(
