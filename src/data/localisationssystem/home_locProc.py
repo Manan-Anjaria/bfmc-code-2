@@ -65,6 +65,7 @@ class LocalisationProcess(WorkerProcess):
             print("Starting Home Localization Process")
             while True:
                 bts, addr = self.server_socket.recvfrom(1024)
+                print("-------------REACHED HERE---------------------")
                 print(addr)
                 bts = bts.decode()
                 data = json.loads(bts)
