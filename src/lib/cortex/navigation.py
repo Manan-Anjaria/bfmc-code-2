@@ -316,7 +316,7 @@ def add_yaw(G):
 
 
 class Navigator:
-    def __init__(self, config: dict, test=True):
+    def __init__(self, config: dict, test=False):
         if test:
             self.graph = nx.read_graphml(
                 "./src/lib/cortex/path_data/test_track.graphml"

@@ -65,10 +65,11 @@ class LocalisationProcess(WorkerProcess):
             print("Starting Home Localization Process")
             while True:
                 bts, addr = self.server_socket.recvfrom(1024)
+                print(addr)
                 bts = bts.decode()
                 data = json.loads(bts)
                 pub_loc.send_json(data, flags=zmq.NOBLOCK)
-                print(data)
+                # print(data)
         except Exception as e:
             print("Home LocSys Error")
             print(e)
