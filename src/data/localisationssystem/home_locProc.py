@@ -60,6 +60,7 @@ class LocalisationProcess(WorkerProcess):
         context_send = zmq.Context()
         pub_loc = context_send.socket(zmq.PUB)
         pub_loc.bind("ipc:///tmp/v31")
+        print("------------REACHED BEFORE TRY----------------")
 
         try:
             print("Starting Home Localization Process")
