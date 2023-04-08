@@ -17,8 +17,8 @@ if config["speed"]:
     }
 else:
     activity_config = {
-        "nodes": [[38, 15], [72, 5], [76, 26]],
-        "activity": ["navigation", "parking", "tohighway"]
+        "nodes": [[38, 15]],
+        "activity": ["navigation"]
     }
 #     activity_config = {
 #     "nodes": [
