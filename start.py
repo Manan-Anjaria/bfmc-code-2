@@ -28,7 +28,7 @@ from src.hardware.camera.SIMCameraProcess import SIMCameraProcess
 from src.lib.perception.lanekeepz import LaneKeepingProcess as LaneKeeping
 from src.lib.perception.signdetection import SignDetectionProcess
 
-# from src.data.localisationssystem.home_locProc import LocalisationProcess
+from src.data.localisationssystem.home_locProc import LocalisationProcess
 
 from src.data.localisationssystem.locsysProc import LocalisationSystemProcess
 
@@ -101,7 +101,7 @@ LOCSYS_SIM_PORT = 8888
 LOCSYS_HOME_PORT = 8888
 
 STREAM_PORT1 = 2244
-STREAM_PORT2 = 4422
+STREAM_PORT2 = 4422 
 # ["cam", "lk", "sd"]
 
 streams = ["cam"]
@@ -151,13 +151,12 @@ if config["enableSIM"]:
     allProcesses.append(locsysProc)
     posFusionInputName.append("loc")
 
-# elif config["home_loc"]:
-#     # LocSys -> Position Fusion
-#     print(">>> Starting Home Localization process")
-#     locsysProc = LocalisationProcess([], [])
-#     allProcesses.append(locsysProc)
-#     posFusionInputName.append("loc")
-#
+elif config["home_loc"]:
+    # LocSys -> Position Fusion
+    print(">>> Starting Home Localization process")
+    locsysProc = LocalisationProcess([], [])
+    allProcesses.append(locsysProc)
+    posFusionInputName.append("loc")
 
 elif config["loc_server"]:
     # LocSys -> Position Fusion
