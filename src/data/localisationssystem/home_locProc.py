@@ -75,7 +75,7 @@ class LocalisationProcess(WorkerProcess):
             while True:
                 # bts, addr = self.server_socket.recvfrom(1024)
                 print("-------------REACHED HERE---------------------")
-                print("Received data from {}:{}".format(addr[0], addr[1]))
+                # print("Received data from {}:{}".format(addr[0], addr[1]))
                 data = sub_loc.recv()
                 data = data.decode()
                 data = json.loads(data)
