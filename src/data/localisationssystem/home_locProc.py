@@ -60,18 +60,27 @@ class LocalisationProcess(WorkerProcess):
         context_send = zmq.Context()
         pub_loc = context_send.socket(zmq.PUB)
         pub_loc.bind("ipc:///tmp/v31")
+        
+
+        context_recv = zmq.Context()
+        sub_loc = context_recv.socket(zmq.SUB)
+        sub_loc.setsockopt(zmq.CONFLATE, 1)
+        sub_loc.connect("ipc:///tmp/vhl")
+        sub_loc.setsockopt_string(zmq.SUBSCRIBE, "")
+
         print("------------REACHED BEFORE TRY----------------")
 
         try:
             print("Starting Home Localization Process")
             while True:
-                bts, addr = self.server_socket.recvfrom(1024)
+                # bts, addr = self.server_socket.recvfrom(1024)
                 print("-------------REACHED HERE---------------------")
-                print(addr)
-                bts = bts.decode()
-                data = json.loads(bts)
+                print("Received data from {}:{}".format(addr[0], addr[1]))
+                data = sub_loc.recv()
+                data = data.decode()
+                data = json.loads(data)
                 pub_loc.send_json(data, flags=zmq.NOBLOCK)
-                # print(data)
+                print(data)
         except Exception as e:
             print("Home LocSys Error")
             print(e)

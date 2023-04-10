@@ -6,12 +6,14 @@ import time
 import json
 import socket
 from threading import Thread
+import zmq
 
 from workerprocess import WorkerProcess
 import joblib
 
 PI_IP = "192.168.152.242"
 PORT = 8888
+
 
 def localize(img: np.ndarray) -> Tuple[float, float]:
     AREA_THRES = 100.0
@@ -21,8 +23,9 @@ def localize(img: np.ndarray) -> Tuple[float, float]:
     # cv2.imshow('frame HSV', frame_HSV)
     # print(frame_HSV[521,493])
     frame_threshold = cv2.inRange(img, (35, 100, 150), (80, 160, 240))
-    cnts = cv2.findContours(frame_threshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    #print(cnts)
+    cnts = cv2.findContours(
+        frame_threshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    # print(cnts)
     cnts = cnts[0] if len(cnts) == 2 else cnts[1]
     x = None
     y = None
@@ -89,6 +92,12 @@ class LocalisationServer:
         outP : Pipe
             Output pipe to send the steering angle value to other process.
         """
+
+        context_send = zmq.Context()
+        pub_hl = context_send.socket(zmq.PUB)
+        pub_hl.setsockopt(zmq.CONFLATE, 1)
+        pub_hl.bind("ipc:///tmp/vhl")
+
         print("Started Home Localization System")
         count = 0
         skip_count = 24
@@ -105,22 +114,25 @@ class LocalisationServer:
                 bytes1 += chunk
                 a = bytes1.find(b"\xff\xd8")  # marks start of the frame
                 b = bytes1.find(b"\xff\xd9")  # marks end   of the frame
-                c = bytes1.rfind(b"\xff\xd9")  # the end of last frame in chunks
+                # the end of last frame in chunks
+                c = bytes1.rfind(b"\xff\xd9")
 
                 if idx < skip_count or a == -1 or b == -1:
                     continue
-                jpg = bytes1[a : b + 2]  # get frame based on markers
-                bytes1 = bytes1[c + 2 :]  # update buffer to store data
+                jpg = bytes1[a: b + 2]  # get frame based on markers
+                bytes1 = bytes1[c + 2:]  # update buffer to store data
                 # of last frame present in chunk
                 # i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
-                i = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                i = cv2.imdecode(np.frombuffer(
+                    jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                 # specify desired output size
                 width = 720
                 height = 1280
                 # specify conjugate x,y coordinates (not y,x)
                 # input = np.float32([[61, 345], [616, 35], [1279, 51], [870, 676]])
                 # input = np.float32([[0, 366], [582, 51], [1257, 66], [788, 715]])
-                input = np.float32([[38, 344], [617, 38], [1279, 57], [860, 669]])
+                input = np.float32(
+                    [[38, 344], [617, 38], [1279, 57], [860, 669]])
 
                 output = np.float32(
                     [[0, 0], [width - 1, 0], [width - 1, width - 1], [0, width - 1]]
@@ -128,7 +140,8 @@ class LocalisationServer:
 
                 # compute perspective matrixbytes1 = bytes1[b+2:]
                 # i = cv2.imdecode(np.fromstring(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
-                i = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                i = cv2.imdecode(np.frombuffer(
+                    jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                 # specify desired output size
                 width = 720
                 # height = 1280
@@ -155,7 +168,8 @@ class LocalisationServer:
                         "rotA": 0,
                     }
                     data = json.dumps(data).encode()
-                    self.client_socket.sendto(data, (self.serverIp, self.port))
+                    # self.client_socket.sendto(data, (self.serverIp, self.port))
+                    pub_hl.send_json(data, flags=zmq.NOBLOCK)
                     print(data)
                     imgOutput = annotate_image(x, y, image)
                 else:
