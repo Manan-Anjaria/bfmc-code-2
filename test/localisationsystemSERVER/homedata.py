@@ -168,6 +168,7 @@ class LocalisationServer:
                         "rotA": 0,
                     }
                     data = json.dumps(data).encode()
+                    data = data.decode('utf-8')
                     # self.client_socket.sendto(data, (self.serverIp, self.port))
                     pub_hl.send_json(data, flags=zmq.NOBLOCK)
                     print(data)
