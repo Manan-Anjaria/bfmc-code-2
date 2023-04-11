@@ -75,10 +75,11 @@ class LocalisationProcess(WorkerProcess):
         try:
             print("Starting Home Localization Process")
             while True:
-                # bts, addr = self.server_socket.recvfrom(1024)
                 print("-------------REACHED HERE---------------------")
-                data = sub_loc.recv()
-                data = data.decode()
+                bts, addr = self.server_socket.recvfrom(1024)
+                # data = sub_loc.recv()
+                # data = data.decode()
+                data = bts.decode()
                 print(data)
                 data = json.loads(data)
                 pub_loc.send_json(data, flags=zmq.NOBLOCK)
