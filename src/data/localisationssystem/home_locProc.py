@@ -35,7 +35,8 @@ class LocalisationProcess(WorkerProcess):
     def _init_socket(self):
         """Initialize the communication socket server."""
         self.port = REMOTE_PORT
-        self.serverIp = "192.168.152.242"
+        # self.serverIp = "192.168.152.242"
+        self.serverIp = "0.0.0.0"
 
         self.server_socket = socket.socket(
             family=socket.AF_INET, type=socket.SOCK_DGRAM
@@ -77,6 +78,7 @@ class LocalisationProcess(WorkerProcess):
             while True:
                 print("-------------REACHED HERE---------------------")
                 bts, addr = self.server_socket.recvfrom(1024)
+                print(addr)
                 # data = sub_loc.recv()
                 # data = data.decode()
                 data = bts.decode()
