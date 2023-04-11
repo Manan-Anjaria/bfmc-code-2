@@ -8,7 +8,6 @@ import socket
 from threading import Thread
 import zmq
 
-from workerprocess import WorkerProcess
 import joblib
 
 PI_IP = "192.168.152.242"
@@ -179,7 +178,7 @@ class LocalisationServer:
                     cv2.imshow("Track Image", imgOutput)
                     key = cv2.waitKey(1)
                     if key == 27 or key == 113:
-                        # joblib.dump({"x": rx, "y": ry}, "coordlist.z")
+                        joblib.dump({"x": rx, "y": ry}, "coordlist.z")
                         cv2.destroyAllWindows()
                         break
                     else:

@@ -4,8 +4,11 @@ from threading import Thread
 from src.templates.workerprocess import WorkerProcess
 import time
 import zmq
-REMOTE_PORT = 8888
+import numpy as np
+import cv2
+from typing import Tuple
 
+REMOTE_PORT = 8888
 
 class LocalisationProcess(WorkerProcess):
     # ===================================== INIT =========================================
@@ -32,7 +35,7 @@ class LocalisationProcess(WorkerProcess):
     def _init_socket(self):
         """Initialize the communication socket server."""
         self.port = REMOTE_PORT
-        self.serverIp = "0.0.0.0"
+        self.serverIp = "192.168.152.242"
 
         self.server_socket = socket.socket(
             family=socket.AF_INET, type=socket.SOCK_DGRAM
@@ -61,7 +64,6 @@ class LocalisationProcess(WorkerProcess):
         pub_loc = context_send.socket(zmq.PUB)
         pub_loc.bind("ipc:///tmp/v31")
         
-
         context_recv = zmq.Context()
         sub_loc = context_recv.socket(zmq.SUB)
         sub_loc.setsockopt(zmq.CONFLATE, 1)
@@ -75,12 +77,11 @@ class LocalisationProcess(WorkerProcess):
             while True:
                 # bts, addr = self.server_socket.recvfrom(1024)
                 print("-------------REACHED HERE---------------------")
-                # print("Received data from {}:{}".format(addr[0], addr[1]))
                 data = sub_loc.recv()
                 data = data.decode()
+                print(data)
                 data = json.loads(data)
                 pub_loc.send_json(data, flags=zmq.NOBLOCK)
-                print(data)
         except Exception as e:
             print("Home LocSys Error")
             print(e)

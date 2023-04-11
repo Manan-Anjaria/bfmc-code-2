@@ -11,7 +11,7 @@
   "env_server": false,
   "start_idx": "86",
   "end_idx": "374",
-  "pc_ip": "192.168.152.70",
+  "pc_ip": "192.168.152.151",
   "pi_ip": "192.168.152.242",
   "home_loc": true,
   "preplan": false,
