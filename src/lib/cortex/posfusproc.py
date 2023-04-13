@@ -77,7 +77,9 @@ class PositionFusionProcess(WorkerProcess):
         outP : Pipe
             Output pipe to send the steering angle value to other process.
         """
+        print("--------------REACHED IN LOC PROC-------------------")
         print("Position Fusion ", self.inPsnames, self.inPs)
+        print(self.inPsnames)
         if "loc" in self.inPsnames:
             context_recv_loc = zmq.Context()
             sub_loc = context_recv_loc.socket(zmq.SUB)
@@ -125,7 +127,7 @@ class PositionFusionProcess(WorkerProcess):
 
                 if "loc" in self.inPsnames:
                     loc: dict = sub_loc.recv_json()
-                    print("--------------REACHED HERE IN LOC PROC-------------------------")
+                    print("--------------REACHED HERE IN 'IF' LOC PROC-------------------------")
                     print("LOC -> ", loc)                    
                     # print(f"Loc Time delta {(time() - loc['timestamp']):.4f}")
                     gx = loc["posA"]
