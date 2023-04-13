@@ -108,6 +108,7 @@ class PositionFusionProcess(WorkerProcess):
                 gy = None
                 gyaw = None
                 print("-----------REACHED IN WHILE-------------")
+                print("PS NAMES IN WHILE", self.inPsnames)
                 pos = list()
                 if "imu" in self.inPsnames:
                     imu = sub_imu.recv_json()
@@ -124,8 +125,8 @@ class PositionFusionProcess(WorkerProcess):
                     az = imu["accelz"]
 
                 if "loc" in self.inPsnames:
-                    loc: dict = sub_loc.recv_json()
                     print("--------------REACHED HERE IN 'IF' LOC PROC-------------------------")
+                    loc: dict = sub_loc.recv_json()
                     print("LOC -> ", loc)                    
                     # print(f"Loc Time delta {(time() - loc['timestamp']):.4f}")
                     gx = loc["posA"]
