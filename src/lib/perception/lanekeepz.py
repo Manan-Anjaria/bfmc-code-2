@@ -17,14 +17,9 @@ from src.templates.workerprocess import WorkerProcess
 
 MAX_STEER = 23
 
-
-
-
 def get_last(inP: Connection):
     timestamp, data = inP.recv()
     while inP.poll():
-        # print("lk: skipping frame")
-        # logger.log("SYNC", f"Skipping Frame delta - {time() - timestamp}")
         timestamp, data = inP.recv()
     return timestamp, data
 
@@ -132,6 +127,7 @@ class LaneKeepingProcess(WorkerProcess):
                 # print("intersection bool : ")
                 # print(intersection_detected)
                 angle = self.computeSteeringAnglePID(val)
+                # print(angle)
                 pub_lk.send_json((angle, intersection_detected), flags=zmq.NOBLOCK)
 
                 if self.enable_stream:
