@@ -71,18 +71,16 @@ class LocalisationProcess(WorkerProcess):
         sub_loc.connect("ipc:///tmp/vhl")
         sub_loc.setsockopt_string(zmq.SUBSCRIBE, "")
 
-        print("------------REACHED BEFORE TRY----------------")
-
         try:
             print("Starting Home Localization Process")
             while True:
-                print("-------------REACHED HERE---------------------")
+                # print("-------------REACHED HERE---------------------")
                 bts, addr = self.server_socket.recvfrom(1024)
-                print(addr)
+                # print(addr)
                 # data = sub_loc.recv()
                 # data = data.decode()
                 data = bts.decode()
-                print(data)
+                # print(data)
                 data = json.loads(data)
                 pub_loc.send_json(data, flags=zmq.NOBLOCK)
         except Exception as e:

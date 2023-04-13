@@ -125,15 +125,13 @@ class PositionFusionProcess(WorkerProcess):
 
                 if "loc" in self.inPsnames:
                     loc: dict = sub_loc.recv_json()
-                    # print("LOC -> ", loc)
+                    print("--------------REACHED HERE IN LOC PROC-------------------------")
+                    print("LOC -> ", loc)                    
                     # print(f"Loc Time delta {(time() - loc['timestamp']):.4f}")
                     gx = loc["posA"]
                     gy = loc["posB"]
                     gyaw = loc["rotA"] if "rotA" in loc.keys() else loc["radA"]
                     logger.log("PIPE", f"loc {loc}")
-
-                    # gyaw = gyaw
-                    # gyaw = 2 * math.pi - (gyaw + math.pi)
 
                 if iyaw is not None:
                     pos_data = self.localize.update(
