@@ -115,6 +115,7 @@ class PositionFusionProcess(WorkerProcess):
                     # print("IMU -> ", imu)
                     # print(f'imu delta {time()-imu["timestamp"]}')
                     logger.log("PIPE", f"imu {imu}")
+                    print("----------REACHED IN IMU AFTER LOGGER---------")
                     # print("IMU", time(), imu["timestamp"])
                     iroll = imu["roll"]
                     ipitch = imu["pitch"]
