@@ -10,7 +10,7 @@ import zmq
 
 import joblib
 
-PI_IP = "192.168.152.242"
+PI_IP = "192.168.117.242"
 PORT = 8888
 
 
