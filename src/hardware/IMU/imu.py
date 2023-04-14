@@ -101,11 +101,10 @@ class imu(threading.Thread):
                     "accely": self.accely,
                     "accelz": self.accelz,
                 }
-                print("IMU send", data)
+                # print("IMU send", data)
                 pub_imu.send_json(data)
 
                 # time.sleep(self.poll_interval * 1.0 / 1000.0)
-
             time.sleep(0.03)
 
     def stop(self):
