@@ -112,7 +112,7 @@ class PositionFusionProcess(WorkerProcess):
                 if "imu" in self.inPsnames:
                     print('-----------RECHED IN IMU----------------')
                     imu = sub_imu.recv_json()
-                    # print("IMU -> ", imu)
+                    print("IMU -> ", imu)
                     # print(f'imu delta {time()-imu["timestamp"]}')
                     logger.log("PIPE", f"imu {imu}")
                     print("----------REACHED IN IMU AFTER LOGGER---------")
