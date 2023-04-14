@@ -54,7 +54,9 @@ class IMUProcess(WorkerProcess):
     # ===================================== INIT TH ======================================
     def _init_threads(self):
         """Create the Camera Publisher thread and add to the list of threads."""
+        print('-------------REACHED IMU WORKER PROC THREAD---------------')
         imuTh = imu()
+        print('-------------REACHED IMU WORKER PROC AFTER DATA FETCH----------------')
         self.threads.append(imuTh)
 
 if __name__ == "__main__":
