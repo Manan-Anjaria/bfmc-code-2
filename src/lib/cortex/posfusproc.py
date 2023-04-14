@@ -107,15 +107,12 @@ class PositionFusionProcess(WorkerProcess):
                 gx = None
                 gy = None
                 gyaw = None
-                print("-----------REACHED IN WHILE-------------")
                 pos = list()
                 if "imu" in self.inPsnames:
-                    print('-----------RECHED IN IMU----------------')
                     imu = sub_imu.recv_json()
-                    print("IMU -> ", imu)
+                    # print("IMU -> ", imu)
                     # print(f'imu delta {time()-imu["timestamp"]}')
                     logger.log("PIPE", f"imu {imu}")
-                    print("----------REACHED IN IMU AFTER LOGGER---------")
                     # print("IMU", time(), imu["timestamp"])
                     iroll = imu["roll"]
                     ipitch = imu["pitch"]
@@ -125,12 +122,9 @@ class PositionFusionProcess(WorkerProcess):
                     ay = imu["accely"]
                     az = imu["accelz"]
 
-                print('---------------REACHED HERE BEFORE IF ------------------')
-                print("PS NAMES IN WHILE", self.inPsnames)
                 if "loc" in self.inPsnames:
-                    print("--------------REACHED HERE IN 'IF' LOC PROC-------------------------")
                     loc: dict = sub_loc.recv_json()
-                    print("LOC -> ", loc)                    
+                    # print("LOC -> ", loc)                    
                     # print(f"Loc Time delta {(time() - loc['timestamp']):.4f}")
                     gx = loc["posA"]
                     gy = loc["posB"]
