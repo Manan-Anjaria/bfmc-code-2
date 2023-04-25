@@ -46,7 +46,6 @@ ry = []
 
 def trigger_behaviour(carstate: CarState, action_man: ActionManager):
     triggerparking = False
-    # tempFlag = Fa
 
     if hasattr(carstate, "parkingcoords"):
         # print("Triggered Parking")
@@ -284,6 +283,8 @@ class DecisionMakingProcess(WorkerProcess):
         outP : Pipe
             Output pipe to send the steering angle value to other process.
         """
+        print("---------------IN DC PROC---------------------")
+        print(self.inPsnames)
         if "lk" in self.inPsnames:
             context_recv_lk = zmq.Context()
             sub_lk = context_recv_lk.socket(zmq.SUB)
@@ -321,6 +322,7 @@ class DecisionMakingProcess(WorkerProcess):
 
         while True:
             try:
+                # print("--------REACHED DC PROC WHILE--------------")
                 # c = time()
                 # start_time = time()
                 # t_lk = time()
@@ -359,6 +361,7 @@ class DecisionMakingProcess(WorkerProcess):
 
                 if "pos" in self.inPsnames:
                     if sub_pos.poll(timeout=0.05):
+                        # print("-----REACHED DC PROC POS IF------------")
                         pos = get_last(sub_pos)
                         logger.log(
                             "PIPE",
@@ -415,13 +418,11 @@ class DecisionMakingProcess(WorkerProcess):
                 logger.log("XY", f"{self.state.x}, {self.state.y},")
                 logger.debug(f"Sonar Front: {self.state.front_distance}")
                 logger.debug(f"Sonar Side: {self.state.side_distance}")
-                # print(f"Final -> ({self.state.steering_angle, self.state.v})")
-                # print("OUT",self.state.steering_angle, self.state.v)
-                sleep(0.1)
+
                 if len(outPs) > 0:
                     outPs[0].send((self.state.steering_angle, self.state.v))
                     # outPs[0].send((0.0, 0.0))
-                # sleep(0.03)
+                sleep(0.03)
 
             except Exception as e:
                 print("Decision Process error:")

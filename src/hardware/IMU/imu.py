@@ -45,7 +45,7 @@ except ImportError as e:
 class imu(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-        self.running = True
+        self.running = True 
 
         self.SETTINGS_FILE = "RTIMULib"
         print("Using settings file " + self.SETTINGS_FILE + ".ini")
@@ -101,7 +101,7 @@ class imu(threading.Thread):
                     "accely": self.accely,
                     "accelz": self.accelz,
                 }
-                # print("IMU send", data)
+                print("IMU send", data)
                 pub_imu.send_json(data)
 
                 # time.sleep(self.poll_interval * 1.0 / 1000.0)

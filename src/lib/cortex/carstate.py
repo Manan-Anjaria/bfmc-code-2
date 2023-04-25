@@ -41,7 +41,7 @@ else:
 #     ],
 # }
 #   activity_config = {
-#    "nodes":[[86,158],[159,226],[227,345],[346,105],[106,111],[70,85]],# [],[]],
+#    "nodes":[[86,158],[159,226],[227,345],[346,105],[106,111],[70,85]],
 #    "activity":["navigation","parking","tohighway","highway","finish","finish2"]
 # }
 

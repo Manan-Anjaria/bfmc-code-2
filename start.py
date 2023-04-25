@@ -2,7 +2,6 @@ from multiprocessing import Process
 import sys
 from multiprocessing import Event, Pipe
 
-
 import argparse
 
 from multiprocessing.connection import Connection
@@ -141,7 +140,6 @@ if config["enableSignDet"]:
     dataFusionInputName.append("sd")
     camOutNames.append("sd")
 
-
 # =============================== DATA ===================================================
 
 # -------LOCSYS----------
@@ -178,8 +176,6 @@ elif config["tl_server"]:
     allProcesses.append(trafficProc)
     dataFusionInputName.append("tl")
 
-
-#
 # ===================== Distance Sensor ==========================================
 # Distance Sensor -> Decision Making (data fusion)
 

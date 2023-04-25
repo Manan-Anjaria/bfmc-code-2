@@ -12,7 +12,6 @@ from src.lib.cortex import cubic_spline_planner
 
 config = get_config()
 
-
 # from src.config import config
 
 target_idx = config["end_idx"]
@@ -433,7 +432,7 @@ class Navigator:
         d = np.hypot(dx, dy)
         # print(dx, dy)
         idxs = np.argsort(d)
-        # print(idxs)
+        #print(idxs)
         # for i in idxs:
         #     print(d[i])
         # min_dyaw = float("inf")

@@ -10,7 +10,7 @@ import zmq
 
 import joblib
 
-PI_IP = "192.168.152.242"
+PI_IP = "192.168.128.242"
 PORT = 8888
 
 
@@ -22,6 +22,7 @@ def localize(img: np.ndarray) -> Tuple[float, float]:
     # cv2.imshow('frame HSV', frame_HSV)
     # print(frame_HSV[521,493])
     frame_threshold = cv2.inRange(img, (35, 100, 150), (80, 160, 240))
+    # frame_threshold = cv2.inRange(img, (99, 125, 187), (115 , 138, 198))
     cnts = cv2.findContours(
         frame_threshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     # print(cnts)
@@ -167,9 +168,9 @@ class LocalisationServer:
                         "rotA": 0,
                     }
                     data = json.dumps(data).encode()
-                    #data = data.decode('utf-8')
+                    # data = data.decode('utf-8')
                     self.client_socket.sendto(data, (self.serverIp, self.port))
-                    #pub_hl.send_json(data, flags=zmq.NOBLOCK)
+                    # pub_hl.send_json(data, flags=zmq.NOBLOCK)
                     print(data)
                     imgOutput = annotate_image(x, y, image)
                 else:

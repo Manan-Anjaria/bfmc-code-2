@@ -32,6 +32,7 @@ from typing import List
 import time
 import zmq
 from src.templates.threadwithstop import ThreadWithStop
+import cv2
 
 # ================================ CAMERA PROCESS =========================================
 class CameraThread(ThreadWithStop):
@@ -87,6 +88,7 @@ class CameraThread(ThreadWithStop):
 
         # camera
         self.camera = PiCamera()
+        # self.camera = cv2.VideoCapture(0)
 
         # camera settings
         self.camera.resolution = (1640, 1232)
