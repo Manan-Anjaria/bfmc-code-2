@@ -322,7 +322,7 @@ class DecisionMakingProcess(WorkerProcess):
 
         while True:
             try:
-                # print("--------REACHED DC PROC WHILE--------------")
+                print("--------REACHED DC PROC WHILE--------------")
                 # c = time()
                 # start_time = time()
                 # t_lk = time()
@@ -361,13 +361,13 @@ class DecisionMakingProcess(WorkerProcess):
 
                 if "pos" in self.inPsnames:
                     if sub_pos.poll(timeout=0.05):
-                        # print("-----REACHED DC PROC POS IF------------")
+                        print("-----REACHED DC PROC POS IF------------")
                         pos = get_last(sub_pos)
                         logger.log(
                             "PIPE",
                             f"POS -> {pos}",
                         )
-                        # print(f"POS -> {pos}")
+                        print(f"POS -> {pos}")
                         # print(pos["timestamp"] - time.time())
                         if pos[0] == 0 and pos[1] == 0:
                             self.state.update_pos_noloc()
