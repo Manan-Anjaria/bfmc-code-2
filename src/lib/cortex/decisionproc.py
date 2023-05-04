@@ -37,12 +37,13 @@ config = get_config()
 import joblib
 from loguru import logger
 import math
-
 import zmq
+import csv
+import time
 
 rx = []
 ry = []
- 
+
 
 def trigger_behaviour(carstate: CarState, action_man: ActionManager):
     triggerparking = False
@@ -229,21 +230,21 @@ class DecisionMakingProcess(WorkerProcess):
 
         ##################################################################
         ################# TEST TRACK 308 ################################
-        data_path = pathlib.Path(
-            pathlib.Path(__file__).parent.parent.parent.resolve(),
-            "data",
-            "new_course.z",
-        )
-        data = joblib.load(data_path)
-        cx = data["x"]
-        cy = data["y"]
-        coord_list = [x for x in zip(cx, cy)]
-        coord_list = data[0]
+        # data_path = pathlib.Path(
+        #     pathlib.Path(__file__).parent.parent.parent.resolve(),
+        #     "data",
+        #     "new_course.z",
+        # )
+        # data = joblib.load(data_path)
+        # cx = data["x"]
+        # cy = data["y"]
+        # coord_list = [x for x in zip(cx, cy)]
+        # coord_list = data[0]
         #################################################################
 
         # pass coordlist here from navigator config
-        # csobj = ControlSystemBehaviour(coord_list=self.state.navigator.coords)
-        csobj = ControlSystemBehaviour(coord_list=coord_list)
+        csobj = ControlSystemBehaviour(coord_list=self.state.navigator.coords)
+        # csobj = ControlSystemBehaviour(coord_list=coord_list)
 
         csaction = ActionBehaviour(name="cs", callback=csobj)
         self.actman.set_action(csaction)
@@ -284,7 +285,15 @@ class DecisionMakingProcess(WorkerProcess):
         outP : Pipe
             Output pipe to send the steering angle value to other process.
         """
-        print("---------------IN DC PROC---------------------")
+        filename = "data.csv"
+        try:
+            with open(filename, 'r') as f:
+                pass
+        except FileNotFoundError:
+            with open(filename, 'w', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(["Timestamp", "Steering Angle"])
+        
         print(self.inPsnames)
         if "lk" in self.inPsnames:
             context_recv_lk = zmq.Context()
@@ -323,7 +332,7 @@ class DecisionMakingProcess(WorkerProcess):
 
         while True:
             try:
-                print("--------REACHED DC PROC WHILE--------------")
+                # print("--------REACHED DC PROC WHILE--------------")
                 # c = time()
                 # start_time = time()
                 # t_lk = time()
@@ -362,13 +371,13 @@ class DecisionMakingProcess(WorkerProcess):
 
                 if "pos" in self.inPsnames:
                     if sub_pos.poll(timeout=0.05):
-                        print("-----REACHED DC PROC POS IF------------")
+                        # print("-----REACHED DC PROC POS IF------------")
                         pos = get_last(sub_pos)
                         logger.log(
                             "PIPE",
                             f"POS -> {pos}",
                         )
-                        print(f"POS -> {pos}")
+                        # print(f"POS -> {pos}")
                         # print(pos["timestamp"] - time.time())
                         if pos[0] == 0 and pos[1] == 0:
                             self.state.update_pos_noloc()
@@ -382,11 +391,11 @@ class DecisionMakingProcess(WorkerProcess):
                     if sub_sd.poll(timeout=0.05):
                         detections = get_last(sub_sd)
                         logger.log("PIPE", f"SD -> {detections}")
-                        print("SD ->", detections)
+                        # print("SD ->", detections)
                         # send data to env server
                         if len(outPs) > 1:
                             for env_data in send_data2env(self.state, detections):
-                                print("ENV -> ", env_data)
+                                # print("ENV -> ", env_data)
                                 logger.log("PIPE", f"ENV -> {env_data}")
                                 logger.log("ENV",f"{env_data}")
                                 outPs[1].send(env_data)
@@ -419,6 +428,15 @@ class DecisionMakingProcess(WorkerProcess):
                 logger.log("XY", f"{self.state.x}, {self.state.y},")
                 logger.debug(f"Sonar Front: {self.state.front_distance}")
                 logger.debug(f"Sonar Side: {self.state.side_distance}")
+
+                # print(self.x, self.y)
+                # print(self.state.x, self.state.y)
+
+                timestamp = int(time.time())
+                steering_angle = self.state.steering_angle
+                with open(filename, 'a', newline='') as f:
+                    writer = csv.writer(f)
+                    writer.writerow([timestamp, steering_angle])
 
                 if len(outPs) > 0:
                     outPs[0].send((self.state.steering_angle, self.state.v))

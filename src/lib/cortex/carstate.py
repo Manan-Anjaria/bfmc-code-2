@@ -12,46 +12,22 @@ config = get_config()
 
 if config["speed"]:
     activity_config = {
-        "nodes": [[86, 220], [221, 85]],  # [],[]],
+        "nodes": [[86, 220], [221, 85]], 
         "activity": ["navigation", "finish"]
     }
 else:
     activity_config = {
-        "nodes": [[38, 15], [72, 5]],
-        "activity": ["navigation", "nav2"]
+        "nodes": [[86,78], [87,51], [104, 24], [147, 62], [148, 159], [160, 226], [227, 345]],
+        "activity": ["nav1", "stop1-2", "priority", "stop3", "nav2", "parking", "tohighway"]
     }
-#     activity_config = {
-#     "nodes": [
-#         [86, 78],
-#         [87, 42],
-#         [98, 1],
-#         [111, 71],
-#         [124, 158],
-#         [159, 226],
-#         [227, 345],
-#     ],
-#     "activity": [
-#         "navigation",
-#         "priority",
-#         "stop",
-#         "priority2",
-#         "navigation2",
-#         "parking",
-#         "tohighway",
-#     ],
-# }
-#   activity_config = {
-#    "nodes":[[86,158],[159,226],[227,345],[346,105],[106,111],[70,85]],
-#    "activity":["navigation","parking","tohighway","highway","finish","finish2"]
-# }
 
-print(activity_config)
+# print(activity_config)
 # car length originally 0.365
 # vmax=0.20
 
 
 class CarState:
-    def __init__(self, max_v=0.20, dt=0.13, car_len=0.26, **kwargs) -> None:
+    def __init__(self, max_v=0.0, dt=0.13, car_len=0.26, **kwargs) -> None:
 
         self.max_v = max_v
         # position data

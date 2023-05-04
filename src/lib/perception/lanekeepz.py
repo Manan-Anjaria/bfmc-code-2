@@ -10,10 +10,13 @@ import cv2
 from loguru import logger
 import zmq
 import numpy as np
-
+import os
 # from simple_pid import PID
 from src.lib.perception.lanekeepfunctions import LaneKeep as LaneKeepMethod
 from src.templates.workerprocess import WorkerProcess
+
+# if not os.path.exists("dataset"):
+#     os.makedirs("dataset")
 
 MAX_STEER = 23
 
@@ -104,10 +107,12 @@ class LaneKeepingProcess(WorkerProcess):
                 data = sub_cam.recv()
                 data = np.frombuffer(data, dtype=np.uint8)
                 img = np.reshape(data, (480, 640, 3))
-                
                 # cv2.imshow('Image', img)
-                # cv2.imwrite(time.time(), img)
-                # print("lk img recv")
+                
+                # timestamp = int(time.time())
+                # filename = os.path.join("dataset", f"{timestamp}.jpg")
+                # cv2.imwrite(filename, img)
+
                 t_r += time.time() - image_recv_start
                 count += 1
 

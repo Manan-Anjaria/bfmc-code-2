@@ -26,9 +26,7 @@ from src.hardware.camera.cameraprocess import CameraProcess
 from src.hardware.camera.SIMCameraProcess import SIMCameraProcess
 from src.lib.perception.lanekeepz import LaneKeepingProcess as LaneKeeping
 from src.lib.perception.signdetection import SignDetectionProcess
-
 from src.data.localisationssystem.home_locProc import LocalisationProcess
-
 from src.data.localisationssystem.locsysProc import LocalisationSystemProcess
 
 # from src.data.localisationssystem.dummy_loc import LocalisationSystemProcess
@@ -219,8 +217,11 @@ dataFusionOutPs.append(FzzMcS)
 if config["env_server"]:
     beacon = 23456
     id = 100
-    serverpublickey = "publickey_server.pem"
-    clientprivatekey = "privateckey_client.pem"
+    # serverpublickey = "publickey_server.pem"
+    # clientprivatekey = "privateckey_client.pem"
+
+    serverpublickey = "public-key_server.pem"
+    clientprivatekey = "private-key_client.pem"
 
     gpsStR, gpsStS = Pipe(duplex=False)
 

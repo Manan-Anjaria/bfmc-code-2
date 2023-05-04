@@ -106,7 +106,7 @@ def give_perpendicular_park_pts(x, y, spot=1):
 
 
 class PathPlanning:
-    def __init__(self, test: bool = True) -> None:
+    def __init__(self, test: bool = False) -> None:
         if test:
             self.graph = nx.read_graphml(
                 "./src/lib/cortex/path_data/test_track.graphml"

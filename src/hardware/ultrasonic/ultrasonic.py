@@ -61,12 +61,14 @@ class Ultrasonic(threading.Thread):
         # and divide by 2, because there and back
         distance = (TimeElapsed * 34300) / 2.0
 
+        # dis/100 is in meters
         return distance / 100
 
     def run(self):
         context_send = zmq.Context()
         pub_dis = context_send.socket(zmq.PUB)
         pub_dis.bind(f"ipc:///tmp/v11")
+        print("REACHED ULTRASONIC RUN-------------------")
 
         while True:
             sonar1 = self.get_distance(GPIO_TRIGGER_FRONT, GPIO_ECHO_FRONT)

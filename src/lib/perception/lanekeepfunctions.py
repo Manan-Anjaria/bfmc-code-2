@@ -250,7 +250,7 @@ class LaneKeep:
                 detected = True
                 final_contours.append(c)
                 # cv2.drawContours(result, [c], -1, (255, 0, 0), 5)
-            print("Intersection Area -> ", area)
+            # print("Intersection Area -> ", area)
 
         return detected, final_contours
 

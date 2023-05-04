@@ -381,7 +381,7 @@ class ObjectStopBehaviour(BehaviourCallback):
         if car_state.detected["pedestrian"][0]:
             x,y=car_state.detected["pedestrian"][1][1]
             # print("Pedestrain", car_state.detected["pedestrian"])
-            print(f"{x}, {y}")
+            # print(f"{x}, {y}")
             #x,y=0,0
             
             if x>thxl and x<thxh and y>thyl and y<thyh:
@@ -908,7 +908,7 @@ class ActionManager:
             self.l4_ab.set(action_time=action_time, **kwargs)
             return True
         elif action.name == "trafficlight" and self.tflight is None:
-            print("TL state set")
+            # print("TL state set")
             self.tflight = action
             self.tflight.set(action_time=action_time, **kwargs)
             return True
