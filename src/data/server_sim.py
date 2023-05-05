@@ -66,7 +66,7 @@ class ServerSIM(WorkerProcess):
                 bts, addr = self.server_socket.recvfrom(1024)
                 bts = bts.decode()
                 command = json.loads(bts)
-                print(command)
+                # print(command)
                 # if self.log:
                 #     print(command)
                 # if self.connect == "loc":

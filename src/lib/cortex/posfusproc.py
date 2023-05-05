@@ -135,7 +135,7 @@ class PositionFusionProcess(WorkerProcess):
                     pos_data = self.localize.update(
                         iyaw, ipitch, iroll, ax, ay, az, gx, gy, iyaw
                     )
-                    print(iyaw)
+                    # print(iyaw)
                     # print("pos_data", pos_data)
                     pub_pos.send_json(pos_data)
 

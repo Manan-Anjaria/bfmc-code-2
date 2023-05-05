@@ -1,0 +1,21 @@
+{
+    "enableStream": true,
+    "enableCameraSpoof": false,
+    "enableRc": false,
+    "enableLaneKeeping": true,
+    "enableSIM": true,
+    "enableSignDet": false,
+    "start_idx": "86",
+    "end_idx": "121",
+    "using_server": false,
+    "test_track": false,
+    "pc_ip": "0.0.0.0",
+    "pi_ip": "0.0.0.0",
+    "home_loc": false,
+    "preplan": false,
+    "park": true,
+    "env_server": false,
+    "loc_server": false,
+    "speed": true,
+    "tl_server": false
+}

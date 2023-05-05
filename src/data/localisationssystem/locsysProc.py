@@ -8,7 +8,8 @@ from src.data.localisationssystem.locsys import LocalisationSystem
 from src.templates.workerprocess import WorkerProcess
 from multiprocessing import Pipe
 import zmq
-
+import sys
+sys.path.append('.')
 
 class LocalisationSystemProcess(WorkerProcess):
     # ================================ CAMERA PROCESS =====================================
@@ -44,7 +45,7 @@ class LocalisationSystemProcess(WorkerProcess):
         # Get time stamp when starting tester
         # Create listener object
         beacon = 12345
-        id = 89
+        id = 2
         serverpublickey = pathlib.Path(
             pathlib.Path(__file__).parent.resolve(), "publickey_server.pem"
         )
