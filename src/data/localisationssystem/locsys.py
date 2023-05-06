@@ -95,8 +95,8 @@ class LocalisationSystem(Thread):
 
 if __name__ == "__main__":
     beacon = 12345
-    id = 4
-    serverpublickey = "publickey_server_test.pem"
+    id = 2
+    serverpublickey = "publickey_server.pem"
 
     gpsStR, gpsStS = Pipe(duplex=False)
 

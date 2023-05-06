@@ -285,15 +285,15 @@ class DecisionMakingProcess(WorkerProcess):
         outP : Pipe
             Output pipe to send the steering angle value to other process.
         """
-        filename = "data.csv"
-        try:
-            with open(filename, 'r') as f:
-                pass
-        except FileNotFoundError:
-            with open(filename, 'w', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow(["Timestamp", "Steering Angle"])
-        
+        # filename = "data.csv"
+        # try:
+        #     with open(filename, 'r') as f:
+        #         pass
+        # except FileNotFoundError:
+        #     with open(filename, 'w', newline='') as f:
+        #         writer = csv.writer(f)
+        #         writer.writerow(["Timestamp", "Steering Angle"])
+
         print(self.inPsnames)
         if "lk" in self.inPsnames:
             context_recv_lk = zmq.Context()
@@ -421,8 +421,9 @@ class DecisionMakingProcess(WorkerProcess):
                     trigger_behaviour(self.state, self.actman)
                 # print(self.state.detected)
                 speed, steer = self.actman(self.state)
-                self.state.v = speed
-                self.state.steering_angle = steer
+                #-------MAIN SPEED AND STEER COMING FROM HERE-----------
+                # self.state.v = speed
+                # self.state.steering_angle = steer
                 rx.append(self.state.x)
                 ry.append(self.state.y)
                 logger.log("XY", f"{self.state.x}, {self.state.y},")
@@ -432,15 +433,16 @@ class DecisionMakingProcess(WorkerProcess):
                 # print(self.x, self.y)
                 # print(self.state.x, self.state.y)
 
-                timestamp = int(time.time())
-                steering_angle = self.state.steering_angle
-                with open(filename, 'a', newline='') as f:
-                    writer = csv.writer(f)
-                    writer.writerow([timestamp, steering_angle])
+                # timestamp = int(time.time())
+                # steering_angle = self.state.steering_angle
+                # with open(filename, 'a', newline='') as f:
+                #     writer = csv.writer(f)
+                #     writer.writerow([timestamp, steering_angle])
 
                 if len(outPs) > 0:
                     outPs[0].send((self.state.steering_angle, self.state.v))
                     # outPs[0].send((0.0, 0.0))
+                
                 sleep(0.03)
 
             except Exception as e:
